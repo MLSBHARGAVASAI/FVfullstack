@@ -18,11 +18,11 @@ app.use(express.urlencoded({ extended: true })); // Parse form submissions
 app.set('view engine', 'ejs'); // Set EJS as templating engine
 app.set('views', path.join(__dirname, 'views')); // Set views directory
 
-// Serve static files (CSS, JS, images) from the dist folder at '/fruits-vegetables/assets'
-app.use('/fruits-vegetables/assets', express.static(path.join(__dirname, 'dist', 'assets')));
+// Serve static files (CSS, JS, images) from the dist folder at '/frontend/dist/assets'
+app.use('/frontend/dist/assets', express.static(path.join(__dirname, 'frontend', 'dist', 'assets')));
 
-// Serve the rest of the assets (including index.html) from the dist folder
-app.use(express.static(path.join(__dirname, 'dist'))); // Make sure 'dist' contains built assets
+// Serve the React build files (index.html, JS, CSS) from frontend/build
+app.use(express.static(path.join(__dirname, 'frontend', 'build')));
 
 // Routes
 
@@ -85,6 +85,11 @@ app.get('/delete-cart-item/:id', async (req, res) => {
   } catch (error) {
     res.status(500).send('Error deleting item from cart');
   }
+});
+
+// Catch-all for handling all other requests (React's routing)
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'frontend', 'build', 'index.html'));
 });
 
 // Start server
