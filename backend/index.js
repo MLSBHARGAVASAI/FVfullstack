@@ -18,7 +18,10 @@ app.use(express.urlencoded({ extended: true })); // Parse form submissions
 app.set('view engine', 'ejs'); // Set EJS as templating engine
 app.set('views', path.join(__dirname, 'views')); // Set views directory
 
-// Serve static files (CSS, JS, images) from the dist folder
+// Serve static files (CSS, JS, images) from the dist folder at '/fruits-vegetables/assets'
+app.use('/fruits-vegetables/assets', express.static(path.join(__dirname, 'dist', 'assets')));
+
+// Serve the rest of the assets (including index.html) from the dist folder
 app.use(express.static(path.join(__dirname, 'dist'))); // Make sure 'dist' contains built assets
 
 // Routes
