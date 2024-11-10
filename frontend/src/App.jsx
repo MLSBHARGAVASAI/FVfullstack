@@ -12,7 +12,7 @@ const App = () => {
 
   // Fetch fruits data from the backend API
   useEffect(() => {
-    fetch('http://localhost:5000/api/fruits')
+    fetch('https://fvfullstackbackend.onrender.com/api/fruits')
       .then(response => response.json())
       .then(data => setFruits(data))
       .catch(error => console.error('Error fetching fruits:', error));
@@ -20,7 +20,7 @@ const App = () => {
 
   // Fetch vegetables data from the backend API
   useEffect(() => {
-    fetch('http://localhost:5000/api/vegetables')
+    fetch('https://fvfullstackbackend.onrender.com/api/vegetables')
       .then(response => response.json())
       .then(data => setVegetables(data))
       .catch(error => console.error('Error fetching vegetables:', error));
