@@ -1,7 +1,6 @@
 import React from 'react';
 import { Container, Row } from 'react-bootstrap';
-import ItemCard from './itemcard';
-import Accordion from 'react-bootstrap/Accordion';
+import ItemCard from './ItemCard';
 
 const FruitsSection = ({ fruits }) => {
   return (
