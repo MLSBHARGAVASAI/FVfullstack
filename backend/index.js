@@ -12,7 +12,7 @@ const app = express();
 let port=process.env.PORT||5000
 
 // Middleware
-app.use(cors({ origin: 'http://localhost:5173' })); // Allow requests from the React frontend
+app.use(cors({ origin: 'https://fvfullstackfrontend.onrender.com' })); // Allow requests from the React frontend
 app.use(express.json()); // Parse JSON requests
 app.use(express.urlencoded({ extended: true })); // Parse form submissions
 app.set('view engine', 'ejs'); // Set EJS as templating engine
