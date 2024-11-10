@@ -17,22 +17,42 @@ export default [
         sourceType: 'module',
       },
     },
-    settings: { react: { version: '18.3' } },
+    settings: {
+      react: { version: '18' }, // Set to React 18
+    },
     plugins: {
       react,
       'react-hooks': reactHooks,
-      'react-refresh': reactRefresh,
+      'react-refresh': reactRefresh, // Ensure it works with React Refresh in development only
     },
     rules: {
       ...js.configs.recommended.rules,
       ...react.configs.recommended.rules,
       ...react.configs['jsx-runtime'].rules,
       ...reactHooks.configs.recommended.rules,
-      'react/jsx-no-target-blank': 'off',
+      'react/jsx-no-target-blank': 'off', 
       'react-refresh/only-export-components': [
         'warn',
         { allowConstantExport: true },
       ],
+      'react/prop-types': 'off', 
+      'react/jsx-uses-react': 'off', // No longer needed in React 17+ with JSX Transform
+      'react/jsx-uses-vars': 'error', // Ensure that JSX elements are treated as variables
+      'no-console': 'warn', // Warn about console logs in production
     },
+    overrides: [
+      {
+        files: ['**/*.jsx'],
+        rules: {
+          'react/prop-types': 'off', // Optionally disable prop-types in JSX files if you're using TypeScript or prefer other validation
+        },
+      },
+      {
+        files: ['**/*.ts', '**/*.tsx'], // If you're working with TypeScript files
+        rules: {
+          'react/prop-types': 'off', // Turn off prop-types in TypeScript files
+        },
+      },
+    ],
   },
 ]
