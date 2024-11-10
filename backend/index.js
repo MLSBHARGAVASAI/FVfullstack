@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const path =require('path')
+const path = require('path');
 
 // Import models
 const Fruit = require('./fruits');
@@ -9,7 +9,7 @@ const Vegetable = require('./vegetables');
 const Cart = require('./cart');
 
 const app = express();
-let port=process.env.PORT||5000
+let port = process.env.PORT || 5000;
 
 // Middleware
 app.use(cors({ origin: 'https://fvfullstackfrontend.onrender.com' })); // Allow requests from the React frontend
@@ -18,9 +18,8 @@ app.use(express.urlencoded({ extended: true })); // Parse form submissions
 app.set('view engine', 'ejs'); // Set EJS as templating engine
 app.set('views', path.join(__dirname, 'views')); // Set views directory
 
-;
-
-
+// Serve static files (CSS, JS, images) from the dist folder
+app.use(express.static(path.join(__dirname, 'dist'))); // Make sure 'dist' contains built assets
 
 // Routes
 
@@ -49,15 +48,12 @@ app.post('/api/add-to-cart', async (req, res) => {
   const { name, img, price } = req.body;
 
   try {
-    // Check if item is already in the cart
     let cartItem = await Cart.findOne({ name });
 
     if (cartItem) {
-      // If the item exists, increment quantity
       cartItem.quantity += 1;
       await cartItem.save();
     } else {
-      // If it does not exist, create a new entry
       cartItem = new Cart({ name, img, price, quantity: 1 });
       await cartItem.save();
     }
@@ -73,7 +69,6 @@ app.get('/cart', async (req, res) => {
   try {
     const cartItems = await Cart.find();
     res.render('cart.ejs', { cartItems });
-    
   } catch (error) {
     res.status(500).send('Error loading cart');
   }
