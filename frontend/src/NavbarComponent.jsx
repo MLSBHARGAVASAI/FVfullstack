@@ -15,7 +15,7 @@ const NavbarComponent = () => {
             <Nav.Link href="#vegetables-section">Vegetables</Nav.Link>
 
             {/* Update Add to Cart link to point to /cart */}
-            <Nav.Link href="http://localhost:5000/cart">Add To Cart</Nav.Link>
+            <Nav.Link href="https://fvfullstackbackend.onrender.com/cart">Add To Cart</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
